@@ -1,3 +1,5 @@
 _secrets.py
 .env
 output.txt
+__pycache__
+thermometer.png
