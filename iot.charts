@@ -1,0 +1,202 @@
+{
+  "exportVersion": 6,
+  "dashboards": {
+    "dashboard-1": {
+      "description": "",
+      "embedding": {},
+      "filters": [],
+      "layout": [
+        {
+          "i": "item-1",
+          "w": 4,
+          "h": 3,
+          "x": 0,
+          "y": 0
+        }
+      ],
+      "title": "IoT"
+    }
+  },
+  "items": {
+    "item-1": {
+      "calculatedFields": [
+        {
+          "fieldPath": "fan_pct",
+          "rawExpression": "{$multiply: [\n  {$divide: ['$fan', 5500]},\n  100\n]}",
+          "derivedMQL": "{\"$multiply\":[{\"$divide\":[\"$fan\",5500]},100]}"
+        }
+      ],
+      "channels": {
+        "x": {
+          "channelType": "category",
+          "inferredType": "Date",
+          "field": "timestamp",
+          "type": "nominal",
+          "isBinning": true,
+          "temporalBinning": [
+            "year",
+            "month",
+            "date",
+            "hours",
+            "minutes"
+          ]
+        },
+        "y": {
+          "channelType": "aggregation",
+          "inferredType": "Number",
+          "field": "fan_pct",
+          "type": "quantitative",
+          "aggregate": "max"
+        },
+        "ylines": {
+          "channelType": "aggregation",
+          "inferredType": "Number",
+          "field": "cpu_temp",
+          "type": "quantitative",
+          "aggregate": "max"
+        },
+        "ylines_series_0": {
+          "channelType": "aggregation",
+          "inferredType": "Number",
+          "field": "gpu_temp",
+          "type": "quantitative",
+          "aggregate": "max"
+        }
+      },
+      "chartType": "Grouped Combo",
+      "convertedFields": [],
+      "customisations": {
+        "options": {
+          "colorDiscrete": {
+            "enabled": true,
+            "value": {
+              "domain": [
+                "y",
+                "ylines",
+                "ylines_series_0"
+              ],
+              "range": [
+                "#b3e6c8",
+                "#196EE6",
+                "#E6B219"
+              ]
+            }
+          }
+        },
+        "conditionalFormatting": [],
+        "axes": {
+          "x": {
+            "categoryLabelAngle": {
+              "enabled": true,
+              "value": "vertical"
+            }
+          },
+          "y": {}
+        },
+        "channels": {
+          "x": {
+            "datePreset": {
+              "enabled": true,
+              "value": "Custom"
+            },
+            "minutePreset": {
+              "enabled": true,
+              "value": "Custom"
+            },
+            "dateTimeFormatting": {
+              "enabled": true,
+              "value": "HH:mm"
+            }
+          },
+          "y": {
+            "numberFormatting": {
+              "enabled": true,
+              "value": "Default"
+            }
+          },
+          "ylines": {
+            "numberFormatting": {
+              "enabled": true,
+              "value": "Default"
+            }
+          },
+          "ylines_series_0": {
+            "numberFormatting": {
+              "enabled": true,
+              "value": "Default"
+            }
+          }
+        }
+      },
+      "dashboardId": "dashboard-1",
+      "dataSourceId": "data-source-1",
+      "description": "Previous Hour",
+      "filters": [
+        {
+          "fieldPath": "timestamp",
+          "type": "Date",
+          "disabled": false,
+          "settings": {
+            "type": "period",
+            "absolute": {
+              "from": {
+                "enabled": false,
+                "date": null,
+                "time": "00:00:00",
+                "inclusive": false
+              },
+              "to": {
+                "enabled": false,
+                "date": null,
+                "time": "00:00:00",
+                "inclusive": false
+              }
+            },
+            "relative": {
+              "from": {
+                "enabled": false,
+                "tense": null,
+                "value": "",
+                "unit": null
+              },
+              "until": {
+                "enabled": false,
+                "tense": null,
+                "value": "",
+                "unit": null
+              }
+            },
+            "period": {
+              "direction": "previous",
+              "count": "1",
+              "unit": "hour",
+              "includeCurrent": true
+            }
+          }
+        }
+      ],
+      "iconValue": "combo-grouped",
+      "interactiveFiltering": "highlight",
+      "itemType": "chart",
+      "lookupFields": [],
+      "meta": {},
+      "missedFields": [],
+      "query": null,
+      "queryId": null,
+      "reductions": {},
+      "sample": false,
+      "title": "Fan vs Temps",
+      "embedding": {}
+    }
+  },
+  "dataSources": {
+    "data-source-1": {
+      "alias": "macbook_ts",
+      "collection": "macbook_ts",
+      "database": "iot",
+      "deployment": "dev-sandbox",
+      "sourceType": "cluster"
+    }
+  },
+  "queries": {}
+}
